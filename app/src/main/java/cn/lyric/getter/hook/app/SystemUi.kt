@@ -4,6 +4,7 @@ package cn.lyric.getter.hook.app
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
+import cn.lyric.getter.tool.Tools.isNot
 import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
@@ -47,21 +48,21 @@ object SystemUi : BaseHook() {
                 }
             }
         }
-//        loadClassOrNull("com.android.systemui.media.MediaCarouselController").isNotNull {
-//            removePlayer(it)
-//        }.isNot {
-//            loadClassOrNull("com.android.systemui.media.controls.ui.MediaCarouselController").isNotNull {
-//                removePlayer(it)
-//            }
-//        }
-//
-//        loadClassOrNull("com.android.systemui.media.MediaData").isNotNull {
-//            isPlaying(it)
-//        }.isNot {
-//            loadClassOrNull("com.android.systemui.media.controls.models.player.MediaData").isNotNull {
-//                isPlaying(it)
-//            }
-//        }
+        loadClassOrNull("com.android.systemui.media.MediaCarouselController").isNotNull {
+            removePlayer(it)
+        }.isNot {
+            loadClassOrNull("com.android.systemui.media.controls.ui.MediaCarouselController").isNotNull {
+                removePlayer(it)
+            }
+        }
+
+        loadClassOrNull("com.android.systemui.media.MediaData").isNotNull {
+            isPlaying(it)
+        }.isNot {
+            loadClassOrNull("com.android.systemui.media.controls.models.player.MediaData").isNotNull {
+                isPlaying(it)
+            }
+        }
 
     }
 }
